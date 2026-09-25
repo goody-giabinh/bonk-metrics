@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BONK Supply | BONK Metrics</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            color: #aaa;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>BONK Metrics</h1>
+
+        <p>Solana / BONK Analytics Platform</p>
+
+        <nav>
+            <a href="index.html">Overview</a>
+            <a href="supply.html">Supply</a>
+            <a href="#">Burn</a>
+            <a href="#">Holders</a>
+            <a href="#">Transactions</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <div class="page-title">
+
+            <h2>BONK Supply</h2>
+
+            <p>
+                Supply statistics and token distribution.
+            </p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Total Supply</h3>
+
+                <div class="value">
+                    ---
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Burned</h3>
+
+                <div class="value">
+                    ---
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Circulating Supply</h3>
+
+                <div class="value">
+                    ---
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
