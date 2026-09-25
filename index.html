@@ -166,37 +166,47 @@ nav a:hover {
     </main>
 <script>
 
-      async function loadBonkPrice() {
+  async function loadBonkData() {
 
         try {
 
             const response = await fetch(
-                "https://api.coingecko.com/api/v3/simple/price?ids=bonk&vs_currencies=usd"
+                "https://api.coingecko.com/api/v3/simple/price?ids=bonk&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true"
             );
 
             const data = await response.json();
 
-            const price = data.bonk.usd;
+            const bonk = data.bonk;
 
+            // Price
             document.getElementById("price").textContent =
-                "$" + price;
+                "$" + bonk.usd;
+
+            // Market Cap
+            document.getElementById("market_cap").textContent =
+                "$" + Math.round(bonk.usd_market_cap).toLocaleString();
+
+            // 24h Volume
+            document.getElementById("24h_volume").textContent =
+                "$" + Math.round(bonk.usd_24h_vol).toLocaleString();
 
         } catch (error) {
 
             document.getElementById("price").textContent =
-                "Data unavailable";
+                "Unavailable";
+
+            document.getElementById("market_cap").textContent =
+                "Unavailable";
+
+            document.getElementById("24h_volume").textContent =
+                "Unavailable";
 
             console.error(error);
-
         }
 
     }
 
-    loadBonkPrice();
-
-    document.getElementById("market_cap").textContent = "$850M";
-
-    document.getElementById("24h_volume").textContent = "$42M";
+    loadBonkData();
 
 </script>
 </body>
