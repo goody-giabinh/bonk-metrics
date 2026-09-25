@@ -1,25 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BONK Metrics</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            color: #aaa;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            margin-bottom: 15px;
+        }
+
+        .supply-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .cards,
+            .supply-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>BONK Metrics</h1>
+    <header>
+        <h1>BONK Metrics</h1>
+        <p>Solana / BONK Analytics Platform</p>
+    </header>
 
-    <p>Welcome to the BONK Analytics Platform.</p>
+    <main>
 
-    <hr>
+        <!-- Market overview -->
 
-    <h2>Supply</h2>
+        <div class="cards">
 
-    <p>Total Supply: Coming soon</p>
-    <p>Burned: Coming soon</p>
-    <p>Circulating Supply: Coming soon</p>
+            <div class="card">
+                <h3>Price</h3>
+                <div class="value">---</div>
+            </div>
+
+            <div class="card">
+                <h3>Market Cap</h3>
+                <div class="value">---</div>
+            </div>
+
+            <div class="card">
+                <h3>24h Volume</h3>
+                <div class="value">---</div>
+            </div>
+
+        </div>
+
+        <!-- Supply -->
+
+        <div class="section">
+
+            <h2>BONK Supply</h2>
+
+            <div class="supply-grid">
+
+                <div class="card">
+                    <h3>Total Supply</h3>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="card">
+                    <h3>Burned</h3>
+                    <div class="value">---</div>
+                </div>
+
+                <div class="card">
+                    <h3>Circulating Supply</h3>
+                    <div class="value">---</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
 
 </body>
+
 </html>
