@@ -121,17 +121,17 @@ nav a:hover {
 
             <div class="card">
                 <h3>Price</h3>
-                <div class="value">---</div>
+                <div class="value" id="price">---</div>
             </div>
 
             <div class="card">
                 <h3>Market Cap</h3>
-                <div class="value">---</div>
+                <div class="value" id="Market Cap">---</div>
             </div>
 
             <div class="card">
                 <h3>24h Volume</h3>
-                <div class="value">---</div>
+                <div class="value" id=24h Volume>---</div>
             </div>
 
         </div>
@@ -164,7 +164,15 @@ nav a:hover {
         </div>
 
     </main>
+<script>
 
+    document.getElementById("price").textContent = "$0.00001234";
+
+    document.getElementById("market-cap").textContent = "$850M";
+
+    document.getElementById("volume").textContent = "$42M";
+
+</script>
 </body>
 
 </html>
