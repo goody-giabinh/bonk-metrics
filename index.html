@@ -144,7 +144,7 @@ nav a:hover {
 
                 <div class="card">
                     <h3>Total Supply</h3>
-                    <div class="value">---</div>
+                    <div class="value" id="total_supply">---</div>
                 </div>
 
                 <div class="card">
@@ -206,6 +206,40 @@ nav a:hover {
 
     loadBonkData();
     setInterval(loadBonkData, 120000);
+    async function loadBonkSupply() {
+
+    try {
+
+        const response = await fetch(
+            "https://api.mainnet-beta.solana.com",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    id: 1,
+                    method: "getTokenSupply",
+                    params: [
+                        "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+                    ]
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+    } catch (error) {
+
+        console.error("Supply error:", error);
+
+    }
+}
 </script>
 </body>
 
