@@ -206,41 +206,50 @@ nav a:hover {
 
     loadBonkData();
     setInterval(loadBonkData, 600000);
-    async function loadBonkSupply() {
+//    
+async function loadBonkSupply() {
+    const supplyElement = document.getElementById("total_supply");
 
     try {
+        supplyElement.textContent = "Loading...";
 
         const response = await fetch(
-            "https://api.mainnet-beta.solana.com",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    jsonrpc: "2.0",
-                    id: 1,
-                    method: "getTokenSupply",
-                    params: [
-                        "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
-                    ]
-                })
-            }
+            "https://ancient-sun-654d.vohieulam.workers.dev/"
         );
 
-        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(`API request failed: ${response.status}`);
+        }
 
-        console.log(data);
+        const result = await response.json();
+
+        if (!result.success || result.data?.supply == null) {
+            throw new Error("Invalid BONK supply response");
+        }
+
+        // Keep the supply as a string to preserve decimal precision.
+        const supply = String(result.data.supply);
+        const [integerPart, decimalPart] = supply.split(".");
+
+        // Add thousand separators without converting to Number.
+        const formattedInteger = integerPart.replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            ","
+        );
+
+        supplyElement.textContent =
+            formattedInteger +
+            (decimalPart !== undefined ? "." + decimalPart : "");
 
     } catch (error) {
-
-        console.error("Supply error:", error);
-
+        supplyElement.textContent = "Unavailable";
+        console.error("BONK Supply error:", error);
     }
 }
+
 loadBonkSupply();
+setInterval(loadBonkSupply, 600000);
+
 </script>
 </body>
 
