@@ -75,6 +75,13 @@ nav a:hover {
             font-weight: bold;
         }
 
+         .data-meta {
+   		 	font-size: 12px;
+   		 	color: #777;
+ 		  	margin: 10px 0 0;
+ 		 	overflow-wrap: anywhere;
+	}
+
         .section {
             margin-top: 30px;
         }
@@ -142,10 +149,26 @@ nav a:hover {
 
             <div class="supply-grid">
 
-                <div class="card">
-                    <h3>Total Supply</h3>
-                    <div class="value" id="total_supply">---</div>
-                </div>
+<div class="card">
+    <h3>Total Supply</h3>
+    <div class="value" id="total_supply">---</div>
+
+    <p class="data-meta">
+        Status: <span id="supply_status">Waiting for data...</span>
+    </p>
+
+    <p class="data-meta">
+        Last updated: <span id="supply_updated">---</span>
+    </p>
+
+    <p class="data-meta">
+        Solana · Helius RPC via Cloudflare Worker
+    </p>
+
+    <p class="data-meta">
+        Solana slot: <span id="supply_slot">---</span>
+    </p>
+</div>
 
                 <div class="card">
                     <h3>Burned</h3>
@@ -209,29 +232,36 @@ nav a:hover {
 //    
 async function loadBonkSupply() {
     const supplyElement = document.getElementById("total_supply");
+    const statusElement = document.getElementById("supply_status");
+    const updatedElement = document.getElementById("supply_updated");
+    const slotElement = document.getElementById("supply_slot");
 
     try {
-        supplyElement.textContent = "Loading...";
-
+        statusElement.textContent = "Loading...";
+        
         const response = await fetch(
             "https://ancient-sun-654d.vohieulam.workers.dev/"
         );
 
         if (!response.ok) {
-            throw new Error(`API request failed: ${response.status}`);
+            throw new Error(`HTTP error: ${response.status}`);
         }
 
         const result = await response.json();
 
-        if (!result.success || result.data?.supply == null) {
-            throw new Error("Invalid BONK supply response");
+        if (
+            result.success !== true ||
+            result.data?.supply == null ||
+            result.data?.slot == null
+        ) {
+            throw new Error("Invalid supply API response");
         }
 
-        // Keep the supply as a string to preserve decimal precision.
+        // Keep the supply as a string to preserve precision.
         const supply = String(result.data.supply);
         const [integerPart, decimalPart] = supply.split(".");
 
-        // Add thousand separators without converting to Number.
+        // Format the integer part with thousand separators.
         const formattedInteger = integerPart.replace(
             /\B(?=(\d{3})+(?!\d))/g,
             ","
@@ -241,15 +271,24 @@ async function loadBonkSupply() {
             formattedInteger +
             (decimalPart !== undefined ? "." + decimalPart : "");
 
+        // Display the Solana slot returned by the API.
+        slotElement.textContent =
+            Number(result.data.slot).toLocaleString("en-US");
+
+        // Record when the browser received the successful response.
+        updatedElement.textContent =
+            new Date().toLocaleString();
+
+        statusElement.textContent = "Connected";
+
     } catch (error) {
-        supplyElement.textContent = "Unavailable";
+        statusElement.textContent = "Update failed";
         console.error("BONK Supply error:", error);
     }
 }
 
 loadBonkSupply();
 setInterval(loadBonkSupply, 600000);
-
 </script>
 </body>
 
